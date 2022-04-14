@@ -1,11 +1,14 @@
 if status is-interactive
   # Commands to run in interactive sessions can go here
   zoxide init fish | source
-	starship init fish | source
-  rbenv init - fish | source
+  starship init fish | source
+  fnm env | source
+  # rbenv init - fish | source
 
-	alias vim="lvim"
-	alias conda="mamba"
+  alias vim="lvim"
+  alias conda="mamba"
+  alias  ls="exa --all"
+  alias be="bundle exec"
 end
 
 # >>> conda initialize >>>

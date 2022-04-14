@@ -1,0 +1,11 @@
+[shell]
+fish_indicator = ""
+powershell_indicator = "_"
+unknown_indicator = "mystery shell"
+style = "cyan bold"
+disabled = false
+
+[shlvl]
+disabled = false
+format = "$shlvl level(s) down"
+threshold = 2
