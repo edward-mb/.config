@@ -143,8 +143,49 @@ lvim.plugins = {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
-
+  {
+    "ethanholz/nvim-lastplace",
+    event = "BufRead",
+    config = function()
+      require("nvim-lastplace").setup({
+        lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+        lastplace_ignore_filetype = {
+          "gitcommit", "gitrebase", "svn", "hgcommit",
+        },
+        lastplace_open_folds = true,
+      })
+    end,
+  },
+  {
+    "folke/todo-comments.nvim",
+    event = "BufRead",
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({ "*" }, {
+        RGB = true, -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
+        RRGGBBAA = true, -- #RRGGBBAA hex codes
+        rgb_fn = true, -- CSS rgb() and rgba() functions
+        hsl_fn = true, -- CSS hsl() and hsla() functions
+        css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+      })
+    end,
+  },
+  { "RRethy/nvim-treesitter-endwise",
+    require('nvim-treesitter.configs').setup {
+      endwise = {
+        enable = true,
+      },
+    }
+  }
 }
+
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
@@ -158,4 +199,29 @@ lvim.builtin.which_key.mappings["t"] = {
   q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
+
+-- vim.list_extend(lvim.lsp.override, { "solargraph" })
+-- lvim.lsp.automatic_configuration.skipped_servers = { "solargraph" }
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "solargraph" })
+
+-- local util = require("lspconfig/util")
+-- local opts = {
+--   cmd = { "solargraph", "stdio" },
+--   filetypes = { "ruby" },
+--   init_options = {
+--     formatting = true
+--   },
+--   root_dir = util.root_pattern("Gemfile", ".git"),
+--   settings = {
+--     solargraph = {
+--       diagnostics = true
+--     }
+--   }
+-- }
+-- -- require("lvim.lsp.manager").setup("solargraph", opts)
+-- require("lspconfig")["solargraph"].setup(opts)
+
+require('lspconfig').solargraph.setup {
+  cmd = { "solargraph", "stdio" }
 }
