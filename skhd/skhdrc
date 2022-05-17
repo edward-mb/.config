@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
 # open terminal
-
-# cmd - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
 cmd + alt - return : index=$(yabai -m query --displays --display | jq .index) && \
                     /Applications/Kitty.app/Contents/MacOS/kitty --instance-group=$index --single-instance -d ~
 
@@ -178,10 +176,13 @@ ctrl + alt - a : yabai -m space --layout bsp;\
 ctrl + alt - d : yabai -m space --layout float;\
                 osascript -e 'display notification "Float layout" with title "Yabai"' 
 
+
+# restart yabai
 ctrl + alt + cmd - r :  osascript -e 'display notification "Restarting" with title "Yabai"' ;\
                         launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai";\
                         osascript -e 'display notification "Restarted!" with title "Yabai"'
 
+# restart skhd
 ctrl + alt + cmd - s :  osascript -e 'display notification "Restarting SKHD" with title "Yabai"' ;\
                         skhd -r;\
                         osascript -e 'display notification "SKHD restarted!" with title "Yabai"'
@@ -190,12 +191,5 @@ ctrl + alt + cmd - s :  osascript -e 'display notification "Restarting SKHD" wit
 ctrl - rewind : cmus-remote --prev
 ctrl - play : cmus-remote --pause
 ctrl - fast  : cmus-remote --next
-
-# ctrl + cmd - rewind : cmusLocation=$(cmus-remote -C status | grep '^position' | cut -d ' ' -f 2)
-# ctrl + cmd - play : cmus-remote --seek $cmusLocation
-
 ctrl + cmd - rewind : set CMUS_LOCATION (cmus-remote -C status | grep '^position' | cut -d ' ' -f 2)
 ctrl + cmd - play : cmus-remote --seek $CMUS_LOCATION
-# f9 : cmus-remote --next
-# f8 : cmus-remote --pause
-# f7 : cmus-remote --prev
