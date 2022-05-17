@@ -1,0 +1,22 @@
+# directory: ~/Music/Beets
+# library: ~/Music/musiclibrary.db
+import:
+  move: yes
+
+directory: ~/Music/CMUS
+library: ~/Music/CMUS-Beet-library.db
+# import:
+#   copy: no
+#   write: no
+
+
+plugins: fetchart lyrics lastgenre embedart replaygain
+
+embedart:
+  ifempty: yes
+
+replaygain:
+  command: /opt/homebrew/bin/aacgain
+  per_disc: yes
+  threads: 16
+  overwrite: yes
