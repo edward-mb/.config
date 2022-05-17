@@ -9,6 +9,7 @@ if status is-interactive
   alias conda="mamba"
   alias  ls="exa --all"
   alias be="bundle exec"
+  alias bat="bat -P"
 end
 
 # >>> conda initialize >>>
