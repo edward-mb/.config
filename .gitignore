@@ -7,3 +7,7 @@ cmus
 gh
 lvim.old
 yarn/global
+
+.mono/certs/Trust
+configstore
+gem
