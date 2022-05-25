@@ -1,5 +1,3 @@
-#!/usr/bin/env sh
-
 # open terminal
 cmd + alt - return : index=$(yabai -m query --displays --display | jq .index) && \
                     /Applications/Kitty.app/Contents/MacOS/kitty --instance-group=$index --single-instance -d ~
@@ -187,9 +185,19 @@ ctrl + alt + cmd - s :  osascript -e 'display notification "Restarting SKHD" wit
                         skhd -r;\
                         osascript -e 'display notification "SKHD restarted!" with title "Yabai"'
 
+# restart sketchybar
+ctrl + alt + cmd - b :  osascript -e 'display notification "Restarting SketchyBar" with title "Yabai"' ;\
+                        brew services restart sketchybar;\
+                        osascript -e 'display notification "SketchyBar restarted!" with title "Yabai"'
 # CMUS - C music player
 ctrl - rewind : cmus-remote --prev
 ctrl - play : cmus-remote --pause
 ctrl - fast  : cmus-remote --next
-ctrl + cmd - rewind : set CMUS_LOCATION (cmus-remote -C status | grep '^position' | cut -d ' ' -f 2)
-ctrl + cmd - play : cmus-remote --seek $CMUS_LOCATION
+
+# CMUS volume
+ctrl - 0x18 : cmus-remote -v +10%
+ctrl - 0x1B : cmus-remote -v -10%
+
+ctrl + cmd - rewind : fish -c "set -U CMUS_LOCATION (cmus-remote -C status | rg '^position' | cut -d ' ' -f 2)" 
+ctrl + cmd - play : fish -c 'cmus-remote --seek $CMUS_LOCATION'
+
