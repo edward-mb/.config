@@ -2,6 +2,8 @@
 
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+
 
 # the scripting-addition must be loaded manually if
 # you are running yabai on macOS Big Sur. Uncomment
@@ -23,16 +25,16 @@ yabai -m config focus_follows_mouse          off
 yabai -m config window_origin_display        default
 yabai -m config window_placement             second_child
 yabai -m config window_topmost               off
-yabai -m config window_shadow                on
-yabai -m config window_opacity               off
+yabai -m config window_shadow                float
+yabai -m config window_opacity               on
 yabai -m config window_opacity_duration      0.0
 yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        0.90
-yabai -m config window_border                off
-yabai -m config window_border_width          3
-yabai -m config active_window_border_color   0xffaddb67
-yabai -m config normal_window_border_color   0xff555555
-yabai -m config insert_feedback_color        0xffd75f5f
+yabai -m config normal_window_opacity        0.97
+# yabai -m config window_border                off
+# yabai -m config window_border_width          3
+# yabai -m config active_window_border_color   0xffaddb67
+# yabai -m config normal_window_border_color   0xff555555
+# yabai -m config insert_feedback_color        0xffd75f5f
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 off
 yabai -m config mouse_modifier               fn
@@ -40,12 +42,68 @@ yabai -m config mouse_action1                move
 yabai -m config mouse_action2                resize
 yabai -m config mouse_drop_action            swap
 
-# general space settings
+# general spac settings
+yabai -m external_bar                        all:28:0
 yabai -m config layout                       float
-yabai -m config top_padding                  30
-yabai -m config bottom_padding               00
-yabai -m config left_padding                 03
-yabai -m config right_padding                03
-yabai -m config window_gap                   05
+yabai -m config top_padding                  32
+yabai -m config bottom_padding               7
+yabai -m config left_padding                 7
+yabai -m config right_padding                7
+yabai -m config window_gap                   7
+
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^Wireless Diagnostics$" manage=off
+yabai -m rule --add app="Activity Monitor" manage=off
+yabai -m rule --add app="System Information" manage=off
+yabai -m rule --add app=".* Preferences" manage=off
+
+
+yabai -m rule --add app="^kitty$" border=on
+
+yabai -m space 1 --label code
+yabai -m space 2 --label tex
+yabai -m space 3 --label web
+yabai -m space 4 --label idle
+yabai -m space 5 --label misc
+yabai -m space 6 --label doc
+yabai -m space 7 --label help
+yabai -m space 8 --label music
+
+# S I G N A L S
+# Sketchybar
+yabai -m signal --add event=window_created action="sketchybar -m --trigger yabai_window &> /dev/null"
+yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger yabai_window &> /dev/null"
+yabai -m signal --add event=window_focused action="sketchybar -m --trigger yabai_window &> /dev/null"
+yabai -m signal --add event=space_changed action="sketchybar -m --trigger yabai_window &> /dev/null"
+yabai -m signal --add event=window_title_changed action="sketchybar -m --trigger yabai_window &> /dev/null"
+
+
+# COLORS
+foreground=#F8F8F2
+background=#282A36
+color0=#000000
+color8=#4D4D4D
+color1=#FF5555
+color9=#FF6E67
+color2=#50FA7B
+color10=#5AF78E
+color3=#F1FA8C
+color11=#F4F99D
+color4=#BD93F9
+color12=#CAA9FA
+color5=#FF79C6
+color13=#FF92D0
+color6=#8BE9FD
+color14=#9AEDFE
+color7=#BFBFBF
+color15=#E6E6E6
+
+
+# B O R D E R S
+yabai -m config window_border on
+yabai -m config window_border_width 3
+yabai -m config active_window_border_color 0xFFF6C177
+yabai -m config normal_window_border_color 0xFF4D4D4D
+yabai -m config insert_feedback_color 0xFFFF5555
 
 echo "yabai configuration loaded.."
