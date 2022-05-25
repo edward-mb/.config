@@ -10,6 +10,7 @@ if status is-interactive
   alias  ls="exa --all"
   alias be="bundle exec"
   alias bat="bat -P"
+  alias icat="kitty +kitten icat"
 end
 
 # >>> conda initialize >>>
