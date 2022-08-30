@@ -10,7 +10,7 @@ library: ~/Music/CMUS-Beet-library.db
 #   write: no
 
 
-plugins: fetchart lyrics lastgenre embedart replaygain discogs
+plugins: fetchart lyrics lastgenre embedart replaygain discogs spotify
 
 embedart:
   ifempty: yes
@@ -22,4 +22,6 @@ replaygain:
   overwrite: yes
 
 discogs:
-   source_weight: 0.1
+   source_weight: 0.5
+spotify:
+    source_weight: 0.3
